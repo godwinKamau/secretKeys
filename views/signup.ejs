@@ -8,14 +8,24 @@
         <link rel="stylesheet" href="css/logandsign.css">
     </head>
     <body class="flexTop">
+        <% if (locals.messages.errors) { %>
+                    <% messages.errors.forEach( el => { %>
+                        <div class="alert alert-danger"><%= el.msg %></div>
+                    <% }) %>    
+                <% } %>
+                <% if (locals.messages.info) { %>
+                    <% messages.info.forEach( el => { %>
+                        <div class="alert alert-info"><%= el.msg %></div>
+                    <% }) %>    
+                <% } %>
         <container>
             <section class="tab flexTop">
                 <h1 class="title">Log In</h1>
             </section>
             <section class="inputs flexTop">
                 <section class="info flexTop">
-                <form action="/login" method="post">
-                    <div class="form-group signupGroup destroy">
+                <form action="/signup" method="post">
+                    <div class="form-group">
                         <div class="signup-border">
                             <label for="email">Email</label>
                         </div>
@@ -25,38 +35,38 @@
                         <div class="signup-border"></div> 
                     </div>
                     <!-- Signup/Login Stuffs -->
-                    <div class="form-group loginGroup">
+                    <div class="form-group">
                         <div class="login-border">
-                            <label for="username" class="login-text">Username</label>
+                            <label for="userName" class="login-text">Username</label>
                         </div>
                         <div class="login-border">
-                            <input type="text" id="username" name="username">
+                            <input type="text" id="userName" name="userName">
                         </div>
                         <div class="login-border"></div> 
                     </div>
                     
-                <div class="form-group loginGroup">
+                <div class="form-group">
                     <div class="login-border">
                         <label for="password" class="login-text">Password</label>
                     </div>
                     <div class="login-border">
-                        <input type="text" class="form-control" id="password" name="password">
+                        <input type="password" class="form-control" id="password" name="password">
                     </div>
                     <div class="login-border"></div>
+                </div>
+                <div class="form-group">
+                    <div class="login-border">
+                        <label for="confirmPassword" class="form-label">Confirm Password</label>
+                    </div>
+                    <div class="login-border">
+                        <input type="password" class="form-control" id="confirmPassword" name="confirmPassword">
+                    </div>
                 </div>
                 </section>
                 <section class="buttons flexTop">
                     <button type="submit">Submit</button>
-                    
                 </section>
                 </form>
-
-                <section class="choices">
-                        <button id="login">Login</button>
-                        <div>or</div>
-                        <button id="signup">Sign Up</button>
-                    </section>
-            </section>
             
             
         </container>

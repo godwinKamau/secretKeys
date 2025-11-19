@@ -33,6 +33,7 @@ app.use(express.json());
 //Logging
 app.use(logger("dev"));
 
+
 //Use forms for put / delete
 app.use(methodOverride("_method"));
 
@@ -42,7 +43,7 @@ app.use(
     secret: "keyboard cat",
     resave: false,
     saveUninitialized: false,
-    store: new MongoStore({ mongoUrl: process.env.DB_STRING }),
+    store: MongoStore.create({ mongoUrl: process.env.DB_STRING }),
   })
 );
 

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile Page</title>
+    <!-- Leaflet CSS and JS -->
+     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+     integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+     crossorigin=""/>
+     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+     integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+     crossorigin=""></script>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/profile.css">
+</head>
+<body class="flexTop">
+    <container class="flexTop">
+        <section class="title">
+        <h1 style="color:black">Welcome <%= user.userName %></h1>
+        </section>
+        
+        <section class="description">
+            <p>Find your Community!</p>
+        </section>
+        
+            <section class="buttons">
+                <a href="/visitSite"><button class="btn-border-reveal" id="showPos"><span>Visit Site 1</span></button></a>
+            </section>
+        
+        <form action="/changeAccess" method="post">
+            <section class="buttons">
+                <input type="text" name="site">
+                <button class="btn-border-reveal" id="changeAccess">Lock/Unlock</button>
+            </section>
+        </form>
+        <!-- <form action="/chat" method="get">
+            <input type="text" name="room">
+            <button type="submit">Create Room</button>
+        </form> -->
+        <a href="/logout">
+            <button type="submit">Log Out</button>
+        </a>
+        <div id="map"></div>
+    </container>
+    <script>
+        
+    </script>
+<script type="application/javascript" src="js/locationtracker.js"></script>
+</body>
+</html>

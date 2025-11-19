@@ -33,12 +33,21 @@ module.exports = function (passport) {
   );
 
   passport.serializeUser((user, done) => {
-    done(null, user);
+    done(null, user.id);
   });
 
-  passport.deserializeUser(function(user, cb) {
-    process.nextTick(function() {
-      return cb(null, user);
-    });
+  passport.deserializeUser(async (id, done) => {
+    try {
+      const user = await User.findById(id);
+      return done(null, user);
+    } catch (err) {
+      return done(err);
+    }
   });
+
+  // passport.deserializeUser(function(user, cb) {
+  //   process.nextTick(function() {
+  //     return cb(null, user);
+  //   });
+  // });
 }

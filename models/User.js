@@ -4,6 +4,7 @@ const mongoose = require("mongoose");
 const UserSchema = new mongoose.Schema({
   userName: { type: String, unique: true },
   email: { type: String, unique: true },
+  access:[{site: String, access: Boolean}],
   password: String,
 });
 
@@ -11,6 +12,7 @@ const UserSchema = new mongoose.Schema({
 
 UserSchema.pre("save", function save(next) {
   const user = this;
+  console.log('middle', user)
   if (!user.isModified("password")) {
     return next();
   }
