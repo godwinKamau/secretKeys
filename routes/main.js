@@ -13,6 +13,8 @@ router.get("/visitSite", siteController.getSite)
 router.post("/changeAccess", siteController.postAccess)
 router.post("/placePop", siteController.postPop)    //temporary route to set up locations
 router.get("/getLocations", siteController.getPop)  //temporary route to get temporary locations
+router.get("/compareLocation/id/:id/lat/:lat/lng/:lng", siteController.compareLocation)
+router.get("/renderSite/:siteName", siteController.renderSite)
 // router.get("/feed", ensureAuth, postsController.getFeed);
 router.get("/login", authController.getLogin);
 router.post("/login", authController.postLogin);

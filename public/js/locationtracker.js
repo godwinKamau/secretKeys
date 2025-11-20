@@ -1,20 +1,21 @@
-// document.querySelector('#postmessage').addEventListener('click',postmessage)
-document.querySelector('#showPos').addEventListener('click',showPos)
-const display = document.querySelector('#current-location')
-const list = document.querySelector('#rooms')
-// document.querySelector('#newRoomMaker').addEventListener('click',newRoomMaker)
 var map = L.map('map')
 var popup = L.popup({ autoClose:false })
-map.on('click', onMapClick)
-
-let markerMaker = 0
 let locations = []
 
 //check the database for messages in locations
-setInterval(getmessages,1000*60*60)
+setInterval(startUp,1000*60*60)
+
+//=======Collects current position
+function currentLocation(){
+    return new Promise((resolve) => {
+        navigator.geolocation.getCurrentPosition((pos) => {
+        resolve(pos.coords)
+        })
+    })
+}
 
 //shows map on load
-function getmessages() {
+function startUp() {
     navigator.geolocation.getCurrentPosition(async (pos) => {
         const crds = pos.coords
         await fetch(`http://api.geonames.org/findNearbyPlaceNameJSON?lat=${crds.latitude}&lng=${crds.longitude}&username=significantswim1984`)
@@ -32,75 +33,31 @@ function getmessages() {
             .then(res => res.json())
             .then(data => {
                 data.locations.forEach(loc => {
-                    locations.push([ loc.siteName , loc.location.latitude, loc.location.longitude ])
+                    locations.push([ loc.siteName , loc.location.latitude, loc.location.longitude,loc._id ])
                 })
-                addMarker(locations)
+                addMarker(locations,crds)
             })
-            // popup
-            // .setLatLng([crds.latitude, crds.longitude])
-            // .setContent("Emma is here.")
-            // .openOn(map);
-            // map.openPopup(popup)
-        
-        
         }
     )
 }
 
-getmessages()
+startUp()
 
-//finds messages in relevant distance
-function haversineDistance(lat1, lon1, lat2, lon2) {
-    const toRad = (angle) => (angle * Math.PI) / 180;
-    
-    const R = 6371; // Radius of the Earth in km
-    const dLat = toRad(lat2 - lat1);
-    const dLon = toRad(lon2 - lon1);
-    
-    const a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
-              Math.cos(toRad(lat1)) * Math.cos(toRad(lat2)) *
-              Math.sin(dLon / 2) * Math.sin(dLon / 2);
-    
-    const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-    return R * c; // Distance in km
-}
-
-// way to add more than 1 pin taken from this stack overflow: https://stackoverflow.com/questions/42968243/how-to-add-multiple-markers-in-leaflet-js
-function onMapClick(e){
-
-    // fetch("/placePop", {
-    //     method:"POST",
-    //     headers: {
-    //         "Content-Type": "application/json"
-    //     },
-    //     body:JSON.stringify({
-    //         siteName:`location ${markerMaker}`,
-    //         location:{ latitude : e.latlng.lat, longitude : e.latlng.lng }
-    //     })
-    // })
-    // .then(res => res.text())
-    // .then(data => console.log(data))
-
-    locations.push([`location ${markerMaker}`,e.latlng.lat,e.latlng.lng])
-    markerMaker++
-    addMarker(locations)
-}
-
-function addMarker(locations){
-    locations.forEach(loc => {
-        marker = new L.popup([loc[1],loc[2]])
-            .setContent(loc[0])
+//Leon gave the advice to change the button to an anchor to touch the server.
+async function addMarker(locations,crds){
+    await locations.forEach(loc => {
+        marker = new L.marker([loc[1],loc[2]])
+            .bindPopup(`
+                <h4>${loc[0]}</h4>
+                <span>A short description</span><br>
+                <a href="/compareLocation/id/${loc[3]}/lat/${crds.latitude}/lng/${crds.longitude}"><button id="sendId">Link</button></a>
+            `)
             .addTo(map)
+        
     });
 }
 
-
-
-
-
-
-
-
+// ==========================================================≠====================≠====≠=≠=≠=≠=≠==================//
 // //constantly watches position(come back to later since it clogs up processes)
 // function watchPos(){
 //     navigator.geolocation.watchPosition((pos) => {
@@ -143,3 +100,41 @@ function addMarker(locations){
 //         // document.querySelector('#long').innerText = `Longitude: ${crds.longitude}`
 //     })
 // }
+
+//============
+// way to add more than 1 pin taken from this stack overflow: https://stackoverflow.com/questions/42968243/how-to-add-multiple-markers-in-leaflet-js
+// map.on('click', onMapClick)
+// function onMapClick(e){
+
+    // fetch("/placePop", {
+    //     method:"POST",
+    //     headers: {
+    //         "Content-Type": "application/json"
+    //     },
+    //     body:JSON.stringify({
+    //         siteName:`location ${markerMaker}`,
+    //         location:{ latitude : e.latlng.lat, longitude : e.latlng.lng }
+    //     })
+    // })
+    // .then(res => res.text())
+    // .then(data => console.log(data))
+
+//     locations.push([`location ${markerMaker}`,e.latlng.lat,e.latlng.lng])
+//     markerMaker++
+//     addMarker(locations)
+// }
+//===========
+
+// This is where I found event listeners for popups: https://stackoverflow.com/questions/60781618/leaflet-how-to-add-click-event-to-button-inside-marker-pop-up-in-ionic-app
+// map.on('popupopen',(e) => {
+//     document.getElementById('sendId').addEventListener( 'click', async () => {
+//         let locId = e.popup._source.details.id
+//         const crds = await currentLocation()
+//         console.log(crds)
+//         fetch(`/compareLocation/id/${locId}/lat/${crds.latitude}/lng/${crds.longitude}`)
+//             .then(res => res.text())
+//             .then(data => {
+//                 document.querySelector('.alert').innerText = data
+//             })
+//     })
+// })
