@@ -4,7 +4,10 @@ const mongoose = require("mongoose");
 const UserSchema = new mongoose.Schema({
   userName: { type: String, unique: true },
   email: { type: String, unique: true },
-  access:[{site: String, access: Boolean}],
+  access: {
+      type : mongoose.Schema.ObjectId,
+      ref : "DummySite"
+    },
   password: String,
 });
 

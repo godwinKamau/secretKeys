@@ -1,12 +1,12 @@
 const passport = require("passport");
 const validator = require("validator");
 const User = require("../models/User");
+const DummySite = require("../models/DummySite");
 
 exports.getLogin = (req, res) => {
   if (req.user) {
     return res.redirect("/profile");
   }
-  console.log("Before passport.authenticate, session is:", req.session);
   res.render("login", {
     title: "Login",
   });
@@ -39,6 +39,7 @@ exports.postLogin = (req, res, next) => {
       if (err) {
         return next(err);
       }
+      console.log(user)
       req.flash("success", { msg: "Success! You are logged in." });
       res.redirect(req.session.returnTo || "/profile");
     });
@@ -71,6 +72,15 @@ exports.getSignup = (req, res) => {
   });
 };
 
+exports.getAdmin = (req,res) => {
+  if (req.user) {
+    return res.redirect("/profile");
+  }
+  res.render("signup_admin", {
+    title: "Create Account",
+  });
+}
+
 exports.postSignup = async (req, res, next) => {
   const validationErrors = [];
   if (!validator.isEmail(req.body.email))
@@ -90,11 +100,25 @@ exports.postSignup = async (req, res, next) => {
     gmail_remove_dots: false,
   });
 
-  const user = new User({
-    userName: req.body.userName,
-    email: req.body.email,
-    password: req.body.password,
-  });
+  let user
+
+  if (req.body.access === undefined) {
+    const userKey = await User.findOne({userName:"User"})
+    user = new User({
+      userName: req.body.userName,
+      email: req.body.email,
+      access: userKey._id,
+      password: req.body.password
+    })
+  } else {
+    user = new User({
+      userName: req.body.userName,
+      email: req.body.email,
+      access: req.body.access,
+      password: req.body.password
+    })
+  }
+  
 
   console.log('user',user)
 
@@ -115,5 +139,4 @@ exports.postSignup = async (req, res, next) => {
         res.redirect("/profile");
       });
   });
-
 };

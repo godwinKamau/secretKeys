@@ -73,7 +73,6 @@ module.exports = {
         const distance = haversineDistance( req.params.lat, req.params.lng, siteInfo.location.latitude, siteInfo.location.longitude)
         console.log('siteinfo',siteInfo)
         if (distance < .5) {
-            // res.render('site.ejs', {siteInfo:siteInfo})
             res.redirect(`/renderSite/${siteInfo.siteName}`)
         } else {
             res.send("That's too far")
@@ -82,6 +81,10 @@ module.exports = {
     },
 
     renderSite: (req,res) => {
-        res.render('site.ejs',{siteInfo:req.params})
+        if (req.user.access){
+            res.render('site_admin.ejs', {siteInfo:req.params, user:req.user})
+        } else {
+            res.render('site.ejs',{siteInfo:req.params})
+        }
     }
 }

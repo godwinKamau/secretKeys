@@ -32,9 +32,11 @@ function startUp() {
         fetch("/getLocations")
             .then(res => res.json())
             .then(data => {
+                console.log(data)
                 data.locations.forEach(loc => {
                     locations.push([ loc.siteName , loc.location.latitude, loc.location.longitude,loc._id ])
                 })
+                console.log(locations)
                 addMarker(locations,crds)
             })
         }
@@ -43,7 +45,7 @@ function startUp() {
 
 startUp()
 
-//Leon gave the advice to change the button to an anchor to touch the server.
+//Leon gave the advice to change the button to an anchor to touch the server and redirect the page.
 async function addMarker(locations,crds){
     await locations.forEach(loc => {
         marker = new L.marker([loc[1],loc[2]])
