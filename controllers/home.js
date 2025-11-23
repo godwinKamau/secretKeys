@@ -1,5 +1,6 @@
 const User = require("../models/User");
 const Sites = require("../models/DummySite")
+const Post = require("../models/Post")
 const mongoose = require("mongoose")
 
 module.exports = {
@@ -14,9 +15,11 @@ module.exports = {
 
       const userKey = await User.findOne({userName:'User'})
       
-      if (!user.access.equals(userKey._id)){
+      if (user.access){
         const siteInfo = await Sites.findById(user.access)
-        res.render("site_admin.ejs", { siteInfo, user })
+        const posts = await Post.find({ location: user.access}).sort({ createdAt: -1 })
+        console.log('posts',posts)
+        res.render("site_admin.ejs", { siteInfo, user, posts })
       } else {
         res.render("profile.ejs", { user });
       }

@@ -100,26 +100,13 @@ exports.postSignup = async (req, res, next) => {
     gmail_remove_dots: false,
   });
 
-  let user
-
-  if (req.body.access === undefined) {
-    const userKey = await User.findOne({userName:"User"})
-    user = new User({
-      userName: req.body.userName,
-      email: req.body.email,
-      access: userKey._id,
-      password: req.body.password
-    })
-  } else {
-    user = new User({
-      userName: req.body.userName,
-      email: req.body.email,
-      access: req.body.access,
-      password: req.body.password
-    })
-  }
+  const user = new User({
+    userName: req.body.userName,
+    email: req.body.email,
+    access: req.body?.access,     // -> ?. <- before access is checking for any access value. If it's there, then return value. If not, then return udefined
+    password: req.body.password
+  })
   
-
   console.log('user',user)
 
   const existingUser = await User.findOne(

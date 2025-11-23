@@ -3,9 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title><%= siteInfo.siteName %></title>
 </head>
 <body>
     <h1>Welcome to <%= siteInfo.siteName %></h1>
+    <ul>
+        <% for (const post of posts) { %>
+        <li><%= post.post %><img src="<%= post.image %>"></li>
+        <% } %>
+    </ul>
+
 </body>
 </html>

@@ -1,5 +1,6 @@
 const User = require('../models/User')
 const DummySite = require('../models/DummySite')
+const Post = require('../models/Post')
 
 //finds messages in relevant distance
 function haversineDistance(lat1, lon1, lat2, lon2) {
@@ -18,39 +19,6 @@ function haversineDistance(lat1, lon1, lat2, lon2) {
 }
 
 module.exports = {
-    getSite: (req,res) => {
-        
-        res.redirect("/profile")
-    },
-
-    postAccess: async (req,res) => {
-        const site = req.body.site
-        console.log(req.user)
-        let access = req.user.access
-
-        let foundSite = false
-        if (access === undefined){
-            access = []
-        }
-
-        console.log('type',typeof access)
-
-        access.forEach(prop => {
-            console.log('prop',prop)
-            if (prop.site === site ) {
-                console.log('found')
-                prop.access = !prop.access
-                foundSite = true
-            }
-        })
-        if (!foundSite) {
-            access.push({site:site,access:true})
-        }
-        console.log('access',access)
-        await User.updateOne({ _id : req.user._id }, { access : access })
-        
-        res.redirect("/profile")
-    },
 
     postPop: async (req,res) => {
         console.log(req.body.siteName,req.body.location.latitude,req.body.location.longitude)
@@ -73,18 +41,22 @@ module.exports = {
         const distance = haversineDistance( req.params.lat, req.params.lng, siteInfo.location.latitude, siteInfo.location.longitude)
         console.log('siteinfo',siteInfo)
         if (distance < .5) {
-            res.redirect(`/renderSite/${siteInfo.siteName}`)
+            res.redirect(`/renderSite/${siteInfo.siteName}/${siteInfo._id}`)
         } else {
             res.send("That's too far")
         }
         
     },
 
-    renderSite: (req,res) => {
-        if (req.user.access){
-            res.render('site_admin.ejs', {siteInfo:req.params, user:req.user})
+    renderSite: async (req,res) => {
+        const posts = await Post.find({ location: req.params._id }).sort({ createdAt: -1 })
+        console.log('posts',posts)
+
+        //TODO: debug this if conditional; not sure if this access comparison is working
+        if (req.user.access.equals(req.params._id)){
+            res.render('site_admin.ejs', {siteInfo:req.params, user:req.user, posts})
         } else {
-            res.render('site.ejs',{siteInfo:req.params})
+            res.render('site.ejs',{siteInfo:req.params, posts})
         }
     }
 }
