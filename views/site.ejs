@@ -1,9 +1,5 @@
-<!DOCTYPE html>
-<html lang="en">
+<%- include('partials/header.ejs') -%>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><%= siteInfo.siteName %></title>
     <link rel="stylesheet" href="/css/main.css">
     <link rel="stylesheet" href="/css/list.css">
 </head>
@@ -26,7 +22,7 @@
             </section>
             <% if (post.image) { %>
                 <div class="media">
-                    <img src="<%= post.image %>">
+                    <img class="postImage" src="<%= post.image %>">
                 </div>
             <% } %>    
         </li>
@@ -34,5 +30,4 @@
         <% } %>
     </ul>
     </section>
-</body>
-</html>
+<%- include('partials/footer') -%>

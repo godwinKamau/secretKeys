@@ -4,7 +4,7 @@ body{
     grid-template-columns: 1fr 2fr 1fr;
     background-image: url('../img/pexels-freestockpro-1227513.jpg');
     background-size: cover;
-    backdrop-filter: grayscale(1) blur(5px);
+    backdrop-filter: grayscale(1) blur(3px);
     height:110vh;
 }
 
@@ -20,9 +20,28 @@ header{
     position: relative;
     min-width: 900px;
     max-width:1100px;
-    height: 100%;
+    height: 99%;
     border: 5px solid red;
     background: url('../img/pexels-freestockpro-1227513.jpg');
-    background-size: 300% 118.5%;
+    background-size: 300% 122%;
     overflow: scroll;
+}
+
+footer{
+    background-color: black;
+    grid-row-start: 2;
+    grid-column-start: 1;
+    grid-column-end: 4;
+    width:100%;
+    overflow: hidden;
+    display: flex;
+}
+
+nav ul{
+    display: flex;
+}
+
+nav li a{
+    color: white;
+    border: none;
 }
