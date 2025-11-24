@@ -13,7 +13,6 @@ module.exports = {
       
       const user = await User.findOne({ _id: req.user })
 
-      const userKey = await User.findOne({userName:'User'})
       
       if (user.access){
         const siteInfo = await Sites.findById(user.access)

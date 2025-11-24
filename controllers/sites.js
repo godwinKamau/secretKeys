@@ -52,11 +52,10 @@ module.exports = {
         const posts = await Post.find({ location: req.params._id }).sort({ createdAt: -1 })
         console.log('posts',posts)
 
-        //TODO: debug this if conditional; not sure if this access comparison is working
-        if (req.user.access.equals(req.params._id)){
-            res.render('site_admin.ejs', {siteInfo:req.params, user:req.user, posts})
-        } else {
+        if (req.user.access === null){
             res.render('site.ejs',{siteInfo:req.params, posts})
-        }
+        } else if (req.user.access.equals(req.params._id)) {
+            res.render('site_admin.ejs', {siteInfo:req.params, user:req.user, posts})
+        } 
     }
 }

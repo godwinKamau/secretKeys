@@ -4,14 +4,35 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><%= siteInfo.siteName %></title>
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="/css/list.css">
 </head>
 <body>
+    <section class="title">
     <h1>Welcome to <%= siteInfo.siteName %></h1>
+    <a href="/logout">
+        <button type="submit">Log Out</button>
+    </a>
+    </section>
+    <section class="bigContainer">
     <ul>
         <% for (const post of posts) { %>
-        <li><%= post.post %><img src="<%= post.image %>"></li>
+        <li>
+            <section class = "date">
+                <%= post.createdAt %>
+            </section>
+            <section class="title">
+                <%= post.post %>
+            </section>
+            <% if (post.image) { %>
+                <div class="media">
+                    <img src="<%= post.image %>">
+                </div>
+            <% } %>    
+        </li>
+                
         <% } %>
     </ul>
-
+    </section>
 </body>
 </html>
