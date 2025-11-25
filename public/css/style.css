@@ -26,3 +26,18 @@ h2{
     font-size: 2.5rem;
 }
 
+button{
+    font-family: 'Source Serif 4','Times New Roman', Times, serif;
+    font-weight: 300;
+    transition: all .3s;
+}
+
+button:hover{
+    background-color: var(--bloo);
+    color:var(--gray);
+    border-radius: 10px;
+}
+
+li{
+    list-style: none;
+}

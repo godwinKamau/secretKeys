@@ -1,10 +1,15 @@
-#map {
-    height:400px;
-    width:600px;
+@keyframes slideDoor {
+  100% {
+    transform: translateZ(0px) translateX(0px) rotateY(90deg);;
+  }
 }
 
 /* Door animation by AM: https://codepen.io/am_eu/pen/EgedaQ */
 .door{
+    animation: .3s 0s ease-out 1 slideDoor;
+    transform-origin: left;
+    transform: perspective(2000px);
+    animation-fill-mode: forwards;
     background-image: url('../img/door.jpg');
     position:absolute;
     top:0px;
@@ -14,8 +19,4 @@
     background-size: cover;
     background-repeat: no-repeat;
     z-index: 0;
-}
-
-.bigContainer section, a{
-    z-index: 1;
 }

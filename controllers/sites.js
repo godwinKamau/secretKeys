@@ -43,7 +43,7 @@ module.exports = {
         if (distance < .5) {
             res.redirect(`/renderSite/${siteInfo.siteName}/${siteInfo._id}`)
         } else {
-            res.send("That's too far")
+            res.send(`That's too far. You're ${distance} km away.`)
         }
         
     },

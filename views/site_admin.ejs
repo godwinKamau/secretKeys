@@ -1,29 +1,15 @@
-<!DOCTYPE html>
-<html lang="en">
+<%- include('partials/header.ejs') %>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Secret Keys</title>
-    <link rel="stylesheet" href="/css/reset.css">
     <link rel="stylesheet" href="/css/main.css">
     <link rel="stylesheet" href="/css/list.css">
+    <link rel="stylesheet" href="/css/modal.css">
 </head>
 <body>
     <div></div>
     <section class="bigContainer">
-    <section class="post">
-    <h2>Add a post</h2>
-    <form action="/post/createPost" enctype="multipart/form-data" method="POST">
-        <div class="mb-3">
-        <label for="post" class="form-label">Post</label>
-            <textarea class="form-control" id="post" name="post"></textarea>
-        </div>
-        <div class="mb-3">
-        <label for="imgUpload" class="form-label">Image</label>
-            <input type="file" class="form-control" id="imageUpload" name="file">
-        </div>
-        <button type="submit" class="btn btn-primary" value="Upload">Submit</button>
-    </form>
+    <section class="intro">
+        <h1><%= siteInfo.siteName %></h1>
+        <button id="myBtn">Add a Post</button>
     </section>
     <ul>
         <% for (const post of posts) { %>
@@ -45,6 +31,35 @@
     </ul>
     
     </section>
+
+<!-- Modal structure taken from w3schools: https://www.w3schools.com/howto/howto_css_modals.asp -->
+    <div id="myModal" class="modal">
+
+    <!-- Modal content -->
+    <div class="modal-content">
+    <form action="/post/createPost" enctype="multipart/form-data" method="POST">
+        <section class="options">
+            <button type="button" id="close">Cancel</button>
+            <section class="button">
+                <button type="submit" class="btn" value="Upload">Post</button>
+            </section>
+        </section>
+        <textarea class="form-control" maxlength="300" cols=70 rows="10" id="post" name="post"></textarea>
+        <section class="input">
+            <section class="file">
+                Attach a file:
+                <label for="imageUpload"><span><i class="fa-regular fa-image"></i></span></label>
+                <input type="file" class="form-control" id="imageUpload" name="file">
+            </section>
+            <section class="charCount">
+                <p>Character's Left: </p><p id="charCount">300</p>
+            </section>
+        </section>
+        
+    </form>
+    </div>
+
+    </div>
     <header>
     <h1>Welcome to <%= siteInfo.siteName %>, <%= user.userName %></h1>
     <a href="/logout">
@@ -52,5 +67,5 @@
     </a>
     </header>
     <footer></footer>
-</body>
-</html>
+    <script type="application/javascript" src="js/modal.js"></script>
+<%- include("partials/footer") %>

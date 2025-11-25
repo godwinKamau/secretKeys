@@ -1,8 +1,11 @@
-ul{
+.bigContainer ul{
+    position:absolute;
+    top:19%;
+    width:inherit;
     padding:0 10px 0 10px;
 }
 
-li {
+.bigContainer li{
     /* width:100%; */
     min-height: 150px;
     max-height:400px;
@@ -17,7 +20,7 @@ li {
     transition:backdrop-filter .5s;
 }
 
-li:hover{
+.bigContainer li:hover{
     backdrop-filter: blur(5px);
 }
 
@@ -50,7 +53,6 @@ li .title{
     max-height: 280px;
     max-width: auto;
     object-fit: scale-down;
-    
 }
 
 
