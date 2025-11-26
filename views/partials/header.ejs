@@ -19,11 +19,16 @@
 <body>
     <section class="locationInfo">
         <section class="navBar">
-            <li><h1>Welcome to <%= siteInfo.siteName %></h1></li>
-            <li><a href="/siteProfile">About <%= siteInfo.siteName %></a></li>
-            <li><a href="/siteEvents">Calendar</a></li>
-            <li><a href="/renderChatroom">Chat With the Community</a></li>
+            <nav>
+                <li></div><span>Welcome to <%= siteInfo.siteName %></span></li>
+                <li class="<%= navigator === 0? "selected" : "notSelected" %>"><div class="<%= navigator === 0? "noWipe" : "wipe" %>"></div><span><a href="/renderSite/<%= siteInfo.siteName %>/<%= siteInfo._id %>">Posts</a></span></li>
+                <li class="<%= navigator === 1? "selected" : "notSelected" %>"><div class="<%= navigator === 1? "noWipe" : "wipe" %>"></div><span><a href="/siteProfile">About <%= siteInfo.siteName %></a></span></li>
+                <li class="<%= navigator === 2? "selected" : "notSelected" %>"><div class="<%= navigator === 2? "noWipe" : "wipe" %>"></div><span><a href="/calendar/siteEvents/id/<%= siteInfo._id %>">Calendar</a></span></li>
+                <li class="<%= navigator === 3? "selected" : "notSelected" %>"><div class="<%= navigator === 3? "noWipe" : "wipe" %>"></div><span><a href="/renderChatroom">Chat With the Community</a></span></li>
+            </nav>
+                
         </section>
+        
     </section>
 </body>
 </html>

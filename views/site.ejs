@@ -13,11 +13,15 @@
     </section> -->
     <section class="bigContainer">
         <div class="door"></div>
+    <section class="intro">
+        <h1>Posts for <%= siteInfo.siteName %> </h1>
+    </section>
     <ul>
         <% for (const post of posts) { %>
         <li>
             <section class = "date">
-                <%= post.createdAt %>
+                <% const monthNames = ["January", "February", "March", "April", "May","June","July", "August", "September", "October", "November","December"] %>
+                <p><%= monthNames[post.createdAt.getMonth()] %> <%= post.createdAt.getDate() %>,<%= post.createdAt.getFullYear() %>, <%= post.createdAt.getHours() > 12 ?  post.createdAt.getHours()-12: post.createdAt.getHours()%>:<%= post.createdAt.getSeconds() %><%= post.createdAt.getHours() > 12 ? 'pm': 'am' %></p>
             </section>
             <section class="title">
                 <%= post.post %>
@@ -33,4 +37,4 @@
     </ul>
     </section>
 
-<%- include('partials/footer') -%>
+<%- include('partials/footer.ejs') -%>
