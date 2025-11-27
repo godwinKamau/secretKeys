@@ -1,3 +1,5 @@
+console.log(id)
+
 const ec = EventCalendar.create(document.getElementById('ec'), {
         view: 'timeGridWeek',
         headerToolbar: {
