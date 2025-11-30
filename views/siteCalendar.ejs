@@ -6,6 +6,7 @@
         <script src="https://cdn.jsdelivr.net/npm/@event-calendar/build@4.7.1/dist/event-calendar.min.js"></script>
         <link rel="stylesheet" href="/css/calendar.css">
         <link rel="stylesheet" href="/css/main.css">
+        <link rel="stylesheet" href="/css/modal.css">
     </head>
     <script>
         const id = <%- JSON.stringify(siteInfo._id) %>
@@ -13,9 +14,41 @@
     <body>
         <section class="bigContainer">
             <div id="ec"></div>
-            
+    <!-- Modal structure taken from w3schools: https://www.w3schools.com/howto/howto_css_modals.asp -->
+    <div id="postDetails" class="modal">
+
+    <!-- Modal content -->
+    <div class="modal-content">
+    <form class="flexTop" action="/calendar/postEvents" enctype="multipart/form-data" method="POST">
+        <h2>Create an Event</h2>
+        <label for="eventTitle">Title:</label><input type="text" name="eventTitle" id="eventTitle">
+        <label for="eventDescription">Description: </label><textarea name="eventDescription" id="eventDescription"></textarea>
+        <label for="eventStart">Start Time: </label><input type="text" id="eventStart" name="eventStart">
+        <label for=eventEnd>End Time: </label><input type="text" id="eventEnd" name="eventEnd">
+        <label for="imageUpload"><span><i class="fa-regular fa-image"></i></span></label><input type="file" id="imageUpload" name="file">
+        <button type="submit">Make an Event</button>
+        <input type="hidden" name="siteId" value="<%= siteInfo._id %>">
+    </form>
+    </div>
+
+    </div>
+    
+    <div id="getDetails" class="modal">
+
+    <!-- Modal content -->
+    <div class="modal-content">
+    <form action="" enctype="multipart/form-data" method="POST">
+        <h2 class="getEventTitle"></h2>
+        <div class="getDesc"></div>      
+        <img class="getImg">  
+    </form>
+    </div>
+
+    </div>
         </section>
-        <script type="text/javascript" src="/js/calendar.js"></script>
+    <script type="text/javascript" src="/js/calendar.js"></script>
     </body>
 
     </html>
+
+    <%- include('partials/footer') %>

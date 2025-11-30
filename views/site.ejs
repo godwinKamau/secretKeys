@@ -23,18 +23,45 @@
                 <% const monthNames = ["January", "February", "March", "April", "May","June","July", "August", "September", "October", "November","December"] %>
                 <p><%= monthNames[post.createdAt.getMonth()] %> <%= post.createdAt.getDate() %>,<%= post.createdAt.getFullYear() %>, <%= post.createdAt.getHours() > 12 ?  post.createdAt.getHours()-12: post.createdAt.getHours()%>:<%= post.createdAt.getSeconds() %><%= post.createdAt.getHours() > 12 ? 'pm': 'am' %></p>
             </section>
-            <section class="title">
-                <%= post.post %>
-            </section>
-            <% if (post.image) { %>
+            <section class="center">
+                <section class="title">
+                    <%= post.post %>
+                </section>
+                <% if (post.image) { %>
                 <div class="media">
                     <img class="postImage" src="<%= post.image %>">
                 </div>
-            <% } %>    
+                <% } %>
+            </section>
+            <section class="marquee">
+                
+            </section>
+            <section class="actions">
+                <section class="buttons">
+                    <form 
+                        
+                        action="/post/likePost/<%= post._id %>?_method=PUT"
+                        method="POST"
+                    >
+                    <button class="btn"><span><i class="fa-solid fa-thumbs-up"></i></span><span class="likes"><%= post.likes %></span></button>
+                    </form>
+
+                    
+                    <button class="btn comments"><span><i class="fa-solid fa-comment"></i></span></button>
+                    
+                    <button class="btn"><span><i class="fa-solid fa-thumbtack"></i></span></button>
+                </section>
+            </section>
+            <section class="commentPopup">
+                <label for="comment">Your Comment:</label>
+                <textarea class="commentArea" id="comment" name="comment"></textarea>
+                <button class="submitComment"></button>
+            </section>    
         </li>
                 
         <% } %>
     </ul>
     </section>
 
+<script type="text/javascript" src="/js/posts.js"></script>
 <%- include('partials/footer.ejs') -%>

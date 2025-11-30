@@ -1,4 +1,5 @@
 const cloudinary = require("../middleware/cloudinary");
+const DummySite = require("../models/DummySite");
 const Post = require("../models/Post");
 const User = require("../models/User");
 
@@ -57,14 +58,16 @@ module.exports = {
   },
   likePost: async (req, res) => {
     try {
-      await Post.findOneAndUpdate(
+      const post = await Post.findOneAndUpdate(
         { _id: req.params.id },
         {
           $inc: { likes: 1 },
         }
       );
-      console.log("Likes +1");
-      res.redirect(`/post/${req.params.id}`);
+      
+      const loc = await DummySite.findOne({ _id: post.location })
+      
+      res.redirect(`/renderSite/${loc.siteName}/${loc._id}`);
     } catch (err) {
       console.log(err);
     }

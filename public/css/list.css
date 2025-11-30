@@ -8,29 +8,46 @@
 .bigContainer li{
     /* width:100%; */
     min-height: 150px;
-    max-height:400px;
+    max-height: 500px;
     list-style: none;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+    display:grid;
+    grid-template-columns: 1fr 1.5fr 1fr;
+    grid-template-rows: 1fr 2fr 1fr;
     gap:15px;
     /* padding:0 30px 15px 30px; */
-    padding-bottom: 20px;
+    margin-bottom: 10px;
     border: 1px solid rgb(196, 196, 196);
-    transition:backdrop-filter .5s;
+    transition:all .3s linear;
 }
 
 .bigContainer li:hover{
     backdrop-filter: blur(5px);
+    background-color: rgba(255,255,255,.3);
 }
 
 li .date{
+    grid-row-start: 1;
+    grid-row-end: 2;
+    grid-column-start: 1;
+    grid-column-end: 2;
     padding:0 1rem;
-    font-size: .5rem;
+    font-size: 1rem;
     align-self: flex-start;
     border:1px solid gray;
-    /* border-bottom-left-radius: 30px; */
     border-bottom-right-radius: 30px;
+}
+
+li .center{
+    grid-column-start: 2;
+    grid-column-end: 3;
+    grid-row-start:1;
+    grid-row-end:3;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+    gap:15px;
+    padding:20px 0;
 }
 
 li .title{
@@ -39,6 +56,7 @@ li .title{
     align-items: center;
     justify-content: center;
     flex-wrap: wrap;
+    font-size: 1.2rem;
 }
 
 .media {
@@ -55,4 +73,77 @@ li .title{
     object-fit: scale-down;
 }
 
+li form{
+    display: inline-block;
+}
 
+li .actions{
+    grid-row-start: 3;
+    grid-row-end: 4;
+    grid-column-start: 1;
+    grid-column-end: 4;
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-end;
+    gap:5px;
+}
+
+.bigContainer li:hover .btn{
+    opacity: 1;
+}
+
+.actions .btn{
+    font-size: 1.5rem;
+    width:70px;
+    border:1px solid var(--gray);
+    background: transparent;
+    padding:1rem;
+    opacity:0;
+    transition: all .1s ;
+}
+
+.actions .btn:hover{
+    background: black;
+    color: var(--gray);
+    cursor: pointer;
+}
+
+.likes {
+    display: none;
+}
+
+.btn:hover .likes {
+    display:block;
+}
+
+.btn:hover .fa-thumbs-up{
+    display: none;
+}
+
+.commentPopup{
+    opacity:0;
+    grid-column-start: 3;
+    grid-row-start: 1;
+    grid-row-end: 3;
+    height:80%;
+    background:black;
+    transition: opacity .1s linear;
+    color:var(--gray);
+}
+
+.activatedPopup{
+    opacity: 1;
+}
+
+.buttons .activatedBtn{
+    background:black;
+    color:white;
+}
+
+.marquee{
+    grid-row-start: 3;
+    grid-column-start:1;
+    grid-column-end:3;
+    background: black;
+
+}
