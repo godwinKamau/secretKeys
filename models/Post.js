@@ -2,8 +2,7 @@ const mongoose = require("mongoose");
 
 const PostSchema = new mongoose.Schema({
   post: {
-    type: String,
-    required: true,
+    type: String
   },
   image: {
     type: String,

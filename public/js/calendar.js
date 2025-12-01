@@ -55,7 +55,9 @@ const ec = EventCalendar.create(document.getElementById('ec'), {
             document.querySelector('#getDetails').style.display = "block"
             document.querySelector('.getEventTitle').innerText = info.event.title
             document.querySelector('.getDesc').innerText = info.event.extendedProps.description
-            document.querySelector('.getImg').src = info.event.extendedProps.image
+            if (info.event.extendedProps.image) {
+                document.querySelector('.getImg').src = info.event.extendedProps.image
+            }
         },
         select: function(info) {
             document.querySelector('#postDetails').style.display = "block"
@@ -85,4 +87,13 @@ const ec = EventCalendar.create(document.getElementById('ec'), {
     function _pad(num) {
         let norm = Math.floor(Math.abs(num));
         return (norm < 10 ? '0' : '') + norm;
+    }
+
+    var modal = document.getElementById("getDetails");
+
+    // When the user clicks anywhere outside of the modal, close it
+    window.onclick = function(event) {
+    if (event.target == modal) {
+        modal.style.display = "none";
+    }
     }

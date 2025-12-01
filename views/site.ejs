@@ -33,13 +33,29 @@
                 </div>
                 <% } %>
             </section>
-            <section class="marquee">
+            <section class="marqueeContainer">
                 
+                <section class="marquee">
+                
+                <% if (comments[post._id]) { %> 
+                    
+                    <p class="commentText" style="--i:<%=comments[post._id].length %>">
+                    <% comments[post._id].forEach(comment =>{ %>
+                        
+                        <span>|</span> &emsp; 
+                        <span><%=comment.user %>- </span>
+                        <%= comment.comment %> 
+                        &emsp; <span>|</span>
+                        
+                    <% }) %>
+                    </p>
+                <% } %>
+                
+                </section>
             </section>
             <section class="actions">
                 <section class="buttons">
-                    <form 
-                        
+                    <form
                         action="/post/likePost/<%= post._id %>?_method=PUT"
                         method="POST"
                     >
@@ -53,9 +69,14 @@
                 </section>
             </section>
             <section class="commentPopup">
-                <label for="comment">Your Comment:</label>
-                <textarea class="commentArea" id="comment" name="comment"></textarea>
-                <button class="submitComment"></button>
+                <form
+                    action="/comment/createComment/<%= post._id %>/<%= siteInfo._id %>"
+                    method="POST"
+                >
+                    <label for="comment">Your Comment:</label>
+                    <textarea class="commentArea" id="comment" name="comment"></textarea>
+                    <button class="submitComment">Add Comment</button>
+                </form>
             </section>    
         </li>
                 

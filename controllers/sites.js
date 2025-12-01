@@ -1,6 +1,7 @@
 const User = require('../models/User')
 const DummySite = require('../models/DummySite')
 const Post = require('../models/Post')
+const Comment = require('../models/Comments')
 
 //finds messages in relevant distance
 function haversineDistance(lat1, lon1, lat2, lon2) {
@@ -49,11 +50,26 @@ module.exports = {
     },
 
     renderSite: async (req,res) => {
-        const posts = await Post.find({ location: req.params._id }).sort({ createdAt: -1 })
-        console.log('posts',posts)
+        // object to collect the comments
+        const postComments = {}
 
+        //finding the posts
+        const posts = await Post.find({ location: req.params._id }).sort({ createdAt: -1 })
+
+        //collect the comments based off of the comments(asked chatGPT how to collect all the comments before rendering)
+        await Promise.all(
+            posts.map(async post => {
+                const comments = await Comment.find({ post: post._id });
+
+                if (comments.length > 0) {
+                    postComments[post._id] = comments;
+                }
+            })
+        );
+        
+        
         if (req.user.access === null){
-            res.render('site.ejs',{siteInfo:req.params, posts, navigator:0 })
+            res.render('site.ejs',{siteInfo:req.params, posts, navigator:0, comments:postComments })
         } else if (req.user.access.equals(req.params._id)) {
             res.render('site_admin.ejs', {siteInfo:req.params, user:req.user, posts, navigator:0 })
         } 
