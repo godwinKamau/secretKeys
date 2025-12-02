@@ -9,7 +9,7 @@
     position:absolute;
     top:0px;
     left:0px;
-    height: inherit;
+    height: 100%;
     width: inherit;
     background-size: cover;
     background-repeat: no-repeat;

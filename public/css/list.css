@@ -212,7 +212,7 @@ li:hover .commentText {
 /* Make it move */
 @keyframes marquee {
     0%   { transform: translate(0, 0); }
-    100% { transform: translate(-500%, 0); }
+    100% { transform: translate(-300%, 0); }
 }
 
 .marqueeActivated{
