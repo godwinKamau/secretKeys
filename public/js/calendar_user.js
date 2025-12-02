@@ -11,7 +11,7 @@ const ec = EventCalendar.create(document.getElementById('ec'), {
         eventSources: [
             {events: async function() {
                 returnArray = []
-                const response = await fetch(`/calendar/getEvents/id/${id}`)
+                const response = await fetch(`/calendar/getUserEvents`)
                 const data = await response.json()
                 
                 data.forEach(el => {

@@ -15,20 +15,3 @@
     <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,200..900;1,8..60,200..900&family=Tinos:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/css/reset.css">
     <link rel="stylesheet" href="/css/style.css">
-</head>
-<body>
-    <section class="locationInfo">
-        <section class="navBar">
-            <nav>
-                <li></div><span>Welcome to <%= siteInfo.siteName %></span></li>
-                <li class="<%= navigator === 0? "selected" : "notSelected" %>"><div class="<%= navigator === 0? "noWipe" : "wipe" %>"></div><span><a href="/renderSite/<%= siteInfo.siteName %>/<%= siteInfo._id %>">Posts</a></span></li>
-                <li class="<%= navigator === 1? "selected" : "notSelected" %>"><div class="<%= navigator === 1? "noWipe" : "wipe" %>"></div><span><a href="/siteProfile">About <%= siteInfo.siteName %></a></span></li>
-                <li class="<%= navigator === 2? "selected" : "notSelected" %>"><div class="<%= navigator === 2? "noWipe" : "wipe" %>"></div><span><a href="/calendar/siteEvents/id/<%= siteInfo._id %>">Calendar</a></span></li>
-                <li class="<%= navigator === 3? "selected" : "notSelected" %>"><div class="<%= navigator === 3? "noWipe" : "wipe" %>"></div><span><a href="/renderChatroom">Chat With the Community</a></span></li>
-            </nav>
-                
-        </section>
-        
-    </section>
-</body>
-</html>

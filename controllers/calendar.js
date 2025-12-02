@@ -6,7 +6,21 @@ const cloudinary = require("../middleware/cloudinary");
 module.exports = {
     getSiteCalendar: async (req,res) => {
         const siteInfo = await Site.findOne( { _id: req.params.id})
-        res.render("siteCalendar", {siteInfo, navigator:2})
+        if (req.user.access === null || !req.user.access.equals(req.params.id)) {
+            res.render("siteCalendar", { siteInfo, navigator:2 })
+        } else if (req.user.access.equals(req.params.id)) {
+            res.render('siteCalendar_admin.ejs', { siteInfo, navigator:2 })
+        }    
+    },
+
+    getPersonalCalendar: async (req,res) => {
+        
+        res.render("siteCalendar_user.ejs", { navigator:5 })    
+    },
+
+    getUserEvents: async(req,res) => {
+        const events = await Event.find( {_id: { $in: req.user.events }})
+        res.json(events)
     },
 
     postEvent: async (req,res) => {
@@ -31,8 +45,18 @@ module.exports = {
     getEvents: async(req,res) => {
         console.log(req.params)
         const events = await Event.find({siteId:req.params.id})
-        console.log(events)
         res.json(events)
 
-    }
+    },
+
+    addEvent: async(req,res) => {
+        console.log('body',req.body)
+        const user = await User.findByIdAndUpdate(
+            req.user._id,
+            { $push: { events:req.body.eventId }}
+        )
+        res.redirect(`/calendar/siteEvents/id/${req.body.siteId}`)
+    },
+
+
 };

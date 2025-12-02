@@ -1,11 +1,10 @@
 <%- include('partials/header.ejs') %>
-<head>
     <link rel="stylesheet" href="/css/main.css">
     <link rel="stylesheet" href="/css/list.css">
     <link rel="stylesheet" href="/css/modal.css">
 </head>
 <body>
-    <div></div>
+<%- include('partials/locationInfo') %>
     <section class="bigContainer">
     <section class="intro">
         <h1><%= siteInfo.siteName %></h1>
@@ -60,12 +59,5 @@
     </div>
 
     </div>
-    <header>
-    <h1>Welcome to <%= siteInfo.siteName %>, <%= user.userName %></h1>
-    <a href="/logout">
-        <button type="submit">Log Out</button>
-    </a>
-    </header>
-    <footer></footer>
     <script type="application/javascript" src="js/modal.js"></script>
 <%- include("partials/footer") %>

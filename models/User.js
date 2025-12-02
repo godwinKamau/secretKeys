@@ -9,6 +9,10 @@ const UserSchema = new mongoose.Schema({
       ref : "DummySite"
     },
   password: String,
+  events: [{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Event"
+  }]
 });
 
 // Password hash middleware.

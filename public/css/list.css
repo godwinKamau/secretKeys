@@ -1,3 +1,7 @@
+:root{
+    --animation-duration:5s;
+}
+
 .bigContainer ul{
     position:absolute;
     top:19%;
@@ -193,7 +197,7 @@ li .actions{
 }
 
 li:hover .commentText {
-    animation: marquee 5s linear infinite;
+    animation: marquee var(--animation-duration) linear infinite;
     
     /* found how to pause animations from here: https://dev.to/jackharner/pausing-css-animations-on-hover-4bi6 */
         &:hover{
@@ -208,7 +212,7 @@ li:hover .commentText {
 /* Make it move */
 @keyframes marquee {
     0%   { transform: translate(0, 0); }
-    100% { transform: translate(-200%, 0); }
+    100% { transform: translate(-500%, 0); }
 }
 
 .marqueeActivated{

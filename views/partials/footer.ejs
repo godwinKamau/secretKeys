@@ -1,4 +1,12 @@
-    <section class="profileInfo"></section>
+    <section class="profileInfo">
+        <section class="profileBar">
+            <nav>
+                <li class="<%= navigator === 4? "selected" : "notSelected" %>"><div class="<%= navigator === 0? "noWipe" : "wipe" %>"></div><span><a href="/profile">Map</a></span></li>
+                <li class="<%= navigator === 5? "selected" : "notSelected" %>"><div class="<%= navigator === 1? "noWipe" : "wipe" %>"></div><span><a href="/calendar/personalEvents">Personal Calendar</a></span></li>
+                <li><a href="/logout">Log Out</a></li>
+            </nav>
+        </section>
+    </section>
 <footer>
     <nav>
         <ul>

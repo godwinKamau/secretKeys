@@ -23,8 +23,7 @@ const ec = EventCalendar.create(document.getElementById('ec'), {
                         title: el.eventTitle,
                         extendedProps: {
                             description: el.eventDescription,
-                            image: el.image,
-                            id: el._id
+                            image: el.image
                         }
                     }
                     returnArray.push(object)
@@ -56,11 +55,15 @@ const ec = EventCalendar.create(document.getElementById('ec'), {
             document.querySelector('#getDetails').style.display = "block"
             document.querySelector('.getEventTitle').innerText = info.event.title
             document.querySelector('.getDesc').innerText = info.event.extendedProps.description
-            document.querySelector('.eventId').value = info.event.extendedProps.id
-            document.querySelector('.siteId').value = info.event.resourceIds[0]
             if (info.event.extendedProps.image) {
                 document.querySelector('.getImg').src = info.event.extendedProps.image
             }
+        },
+        select: function(info) {
+            document.querySelector('#postDetails').style.display = "block"
+            document.querySelector('#eventStart').value = info.startStr.split('T').join(' ')
+            document.querySelector('#eventEnd').value = info.endStr.split('T').join(' ')
+            
         }
     });
 

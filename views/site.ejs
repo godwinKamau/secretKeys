@@ -5,6 +5,7 @@
     <link rel="stylesheet" href="/css/door.css">
 </head>
 <body>
+<%- include('partials/locationInfo') %>
     <!-- <section class="title">
     <h1>Welcome to <%= siteInfo.siteName %></h1>
     <a href="/logout">
@@ -39,7 +40,7 @@
                 
                 <% if (comments[post._id]) { %> 
                     
-                    <p class="commentText" style="--i:<%=comments[post._id].length %>">
+                    <p class="commentText">
                     <% comments[post._id].forEach(comment =>{ %>
                         
                         <span>|</span> &emsp; 
@@ -83,6 +84,6 @@
         <% } %>
     </ul>
     </section>
-
 <script type="text/javascript" src="/js/posts.js"></script>
+
 <%- include('partials/footer.ejs') -%>
