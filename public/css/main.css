@@ -2,7 +2,7 @@ body{
     display: grid;
     grid-template-rows: 90% 10%;
     grid-template-columns: 1fr 2fr 1fr;
-    background-image: url('../img/pexels-freestockpro-1227513.jpg');
+    background-image: var(--url);
     background-size: cover;
     backdrop-filter: grayscale(1) blur(3px);
     height:110vh;
