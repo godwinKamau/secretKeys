@@ -26,5 +26,10 @@ module.exports = {
     } catch (err) {
       console.log(err);
     }
+  },
+  getColors: async (req,res) => {
+    const user = await User.findById(req.user._id)
+    res.json(user.colors)
+
   }
 };

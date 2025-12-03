@@ -13,7 +13,12 @@ const UserSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: "Event"
   }],
-  score: Number
+  score: Number,
+  colors: {
+    color1: String,
+    color2: String,
+    color3: String
+  }
 });
 
 // Password hash middleware.

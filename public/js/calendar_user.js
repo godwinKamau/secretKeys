@@ -7,7 +7,10 @@ const ec = EventCalendar.create(document.getElementById('ec'), {
             center: 'title',
             end: 'dayGridMonth,timeGridWeek,timeGridDay,listWeek'
         },
-        scrollTime: '09:00:00',
+        slotMinTime: "09:00:00",
+slotMaxTime: "21:00:00",  // or whatever end time you want
+
+
         eventSources: [
             {events: async function() {
                 returnArray = []

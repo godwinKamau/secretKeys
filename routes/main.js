@@ -20,5 +20,6 @@ router.get("/signup", authController.getSignup);
 router.post("/signup", authController.postSignup);
 router.get("/signupAdmin", authController.getAdmin);
 router.get("/renderSite/:siteName/:_id", siteController.renderSite)
+router.get("/getColors",homeController.getColors)
 
 module.exports = router;
