@@ -1,19 +1,6 @@
 #map {
-    height:400px;
-    width:600px;
-}
-
-/* Door animation by AM: https://codepen.io/am_eu/pen/EgedaQ */
-.door{
-    background-image: url('../img/door.jpg');
-    position:absolute;
-    top:0px;
-    left:0px;
-    height: 100%;
-    width: inherit;
-    background-size: cover;
-    background-repeat: no-repeat;
-    z-index: 0;
+    height:500px;
+    width:700px;
 }
 
 .bigContainer section, a{

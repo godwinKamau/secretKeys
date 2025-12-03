@@ -1,72 +1,110 @@
 body{
     display: grid;
-    grid-template-rows: 90% 10%;
-    grid-template-columns: 1fr 1.5fr;
+    grid-template-rows: 5% 85% 10%;
+    grid-template-columns: 1fr 2fr;
     background: linear-gradient(52deg, rgba(0, 0, 0, 1) 0%, var(--color1) 22%, rgba(0, 0, 0, 1) 57%),
         linear-gradient(90deg,var(--color1) 0%, var(--color1) 12%,rgba(0, 0, 0, 1) 57%);
     height:110vh;
 }
 
+header{
+    grid-row-start: 1;
+    grid-row-end: 2;
+    grid-column-start: 1;
+    grid-column-end: 3;
+    background: black;
+    display:flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 0 0 15px;
+}
+
+.logo{
+    width:150px;
+    background: pink;
+    height: 100%;
+}
+
+.headerButtons{
+    align-self: stretch;
+}
+
+.headerButtons nav{
+    height:100%;
+    display: flex;
+
+}
+
+.headerButtons nav button{
+    height:100%;
+    width:150px;
+    background: black;
+    color: var(--gray);
+}
+
+.headerButtons nav button:hover{
+    cursor: pointer;
+    background: var(--color2);
+    font-size: 1.1rem;
+}
+
 .infoContainer{
     grid-column-start: 1;
     grid-column-end: 2;
+    grid-row-start: 2;
+    grid-row-end:3;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    padding-top: 150px;
 }
 
-.infoContainer h1{
+.h1Container{
+    border-top-right-radius: 10px;
+    background: rgba(0, 0, 0, 0.5);
+    height:7rem;
+    width:fit-content;
+    padding-left: 30px;
+    align-self: flex-start;
+    display: flex;
+    align-items: center;
+}
+
+h1{
     font-family: 'Market Deco',monospace;
     letter-spacing: 1rem;
     text-shadow: 5px 5px var(--color1);
 }
 
-.locationInfo{
-    grid-row-start: 1;
-    grid-row-end:2;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-end;
-    padding-top:20%;
+.navContainer{
+    background: black;
+    font-size: 2rem;
+    height:3rem;
+    width:500px;
+    text-align: start;
+    cursor: pointer;
+    color:var(--gray);
+    border:none;
 }
 
-/* .profileInfo{
-    grid-row-start:1;
-    grid-row-end:2;
-    grid-column-start: 3;
-    grid-column-end: 4;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    padding-top:20%;
-} */
-
-.navBar, .profileBar{
-    background-color: rgba(0, 0, 0, 0.9);
-    width:80%;
-}
-
-.navBar{
-    border-top-left-radius: 20px;
-    border-bottom-left-radius: 20px; 
-}
-
-.profileBar{
-    border-top-right-radius: 20px;
-    border-bottom-right-radius: 20px; 
-}
-
-nav{
-    width: 100%;
-    height: 100%;
+.infoContainer nav{
+    width:fit-content;
+    padding: 10px 0 15px 20px;
     display: flex;
     flex-direction: column;
     align-items: flex-end;
     gap:30px;
+    background: rgba(0, 0, 0, 0.3);
+    border-bottom-left-radius: 10px;
 }
 
-.navBar li{
+nav a {
     position:relative;
-    width:100%;
-    padding:15px 10px;
-    text-align: end;
+}
+
+.navIcon{
+    color: black;
 }
 
 .wipe{
@@ -74,10 +112,19 @@ nav{
     top:0;
     left:100%;
     height:100%;
-    width:100%;
-    background: linear-gradient(var(--color2),var(--color3));
-    transition: all .2s linear;
+    width:0%;
+    background: var(--color1);
+    transition: all .3s ease-in-out;
     z-index:0;
+}
+
+nav a:hover > .wipe{
+    width:100%;
+    left:0;
+}
+
+nav a:hover{
+    font-weight: bold;
 }
 
 .selected{
@@ -86,39 +133,52 @@ nav{
     background-color: var(--color3);
 }
 
-.navBar li:first-of-type{
-    background-color: var(--color3);
-    border-top-left-radius: 20px;
+nav a span{
+    position: relative;
+    z-index: 2;
+}
+
+.score{
+    margin-top: 2rem;
+    border-top:5px solid black;
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+    border-left: 5px solid black;
+    border-bottom: 5px solid black;
+    height:10rem;
+    width:17rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap:.5rem;
+    transition: all .1s ease-in;
+}
+
+.score:hover{
+    background: var(--color2);
+    color:var(--gray);
+}
+
+h3{
+    display: inline-block;
+    text-align: center;
+    padding:10px 0;
+    font-family: 'Market Deco',monospace;
+    background: rgba(0, 0, 0, 0.5);
+    width:100%;
+    font-size: 2rem;
     font-weight: bold;
 }
 
-.navBar li:first-of-type span{
-    color:var(--gray);
-    font-size: 1.5rem;
-}
-
-.navBar li:last-of-type div{
-    border-bottom-left-radius: 20px;
-}
-
-.navBar li:hover > .wipe{
-    left:0;
-}
-
-.navBar span{
-    position: inherit;
-    z-index: 2;
-}
-
-header{
-    display: flex;
-    flex-direction: column;
-    z-index: 2;
-    width:100%;
+.score span{
+    justify-self: center;
+    font-size:5rem
 }
 
 .bigContainer{
     grid-column-start: 2;
+    grid-column-end: 3;
+    grid-row-start: 2;
     grid-column-end: 3;
     position: relative;
     border: 5px solid var(--color1);
@@ -126,37 +186,52 @@ header{
     overflow: scroll;
 }
 
-.intro{
-    height:15%;
+.upperDesc{
+    color:var(--gray);
+    border:1px dashed var(--gray);
+    align-self: flex-end;
+    height:150px;
+    width:50%;
+    margin: 20px 0;
     display: flex;
-    justify-content: space-evenly;
-    align-content: center;
-    width: 880px;
-    position: fixed;
-    padding:15px 5px;
-    background: linear-gradient(var(--bblue) 0%, var(--bblue) 70%, transparent);
+}
+
+.upperDesc .words{
+    flex:2;
+    padding: 5px 3px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
     gap:10px;
-    z-index: 1;
+    text-align: center;
+}
+
+.words p{
+    font-size: 1.2rem;
+    
+}
+
+.upperDesc h2{
+    font-family: 'Market Deco',monospace;;
+}
+
+.upperDesc span{
+    color: white;
+    font-size: 5rem;
+    border-left:1px dashed var(--gray);
+    display: flex;
+    align-items: center;
+    padding: 0 20px;
 }
 
 footer{
     background-color: black;
-    grid-row-start: 2;
-    grid-row-end:3;
+    grid-row-start: 3;
+    grid-row-end:4;
     grid-column-start: 1;
     grid-column-end: 4;
     width:100%;
     overflow: hidden;
     display: flex;
-}
-
-nav ul{
-    display: flex;
-    
-}
-
-nav li a{
-    color: white;
-    border: none;
 }
 

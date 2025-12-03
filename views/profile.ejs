@@ -12,28 +12,17 @@
     <link rel="stylesheet" href="css/profile.css">
 </head>
 <body>
-    <section class="infoContainer">
-        <section class="h1Container">
-            <h1>Profile</h1>
-            
-        </section>
-    </section>
+    <%- include("partials/realHeader") %>
+    <%- include("partials/profileInfo") %>
     <section class="bigContainer flexTop">
-        <section class="title">
-        <h1>Find a Secret</h1>
-        <p>Score: <%= user.score %></p> 
+        <section class="upperDesc">
+            <section class="words">
+                <h2>Discover a secret site</h2>
+                <p>These are the websites in your area. If you're close enough, the website will open...</p>
+            </section>
+            <span><i class="fa-solid fa-magnifying-glass"></i></span>
         </section>
-        
-        <!-- <form action="/chat" method="get">
-            <input type="text" name="room">
-            <button type="submit">Create Room</button>
-        </form> -->
-        <a href="/logout">
-            <button type="submit">Log Out</button>
-        </a>
         <div id="map"></div>
-        
-        <div class="door"></div>
     </section>
     
 <script defer type="application/javascript" src="js/locationtracker.js"></script>

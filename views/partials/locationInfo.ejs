@@ -1,12 +1,21 @@
 <body>
-    <section class="locationInfo">
-        <section class="navBar">
+        <section class="infoContainer">
+            <section class="h1Container">
+                <% if (siteInfo.siteName.length > 8) { %>
+                    <h1 style="font-size: 2rem; text-shadow: 3px 3px var(--color1);"><%= siteInfo.siteName %></h1>    
+                <% } else { %> 
+                    <h1><%= siteInfo.siteName %></h1>
+                <% } %>
+            </section>
             <nav>
-                <li></div><span>Welcome to <%= siteInfo.siteName %></span></li>
-                <li class="<%= navigator === 0? "selected" : "notSelected" %>"><div class="<%= navigator === 0? "noWipe" : "wipe" %>"></div><span><a href="/renderSite/<%= siteInfo.siteName %>/<%= siteInfo._id %>">Posts</a></span></li>
-                <li class="<%= navigator === 1? "selected" : "notSelected" %>"><div class="<%= navigator === 1? "noWipe" : "wipe" %>"></div><span><a href="/siteProfile">About <%= siteInfo.siteName %></a></span></li>
-                <li class="<%= navigator === 2? "selected" : "notSelected" %>"><div class="<%= navigator === 2? "noWipe" : "wipe" %>"></div><span><a href="/calendar/siteEvents/id/<%= siteInfo._id %>">Calendar</a></span></li>
-                <li class="<%= navigator === 3? "selected" : "notSelected" %>"><div class="<%= navigator === 3? "noWipe" : "wipe" %>"></div><span><a href="/renderChatroom">Chat With the Community</a></span></li>
+                <a href="/renderSite/<%= siteInfo.siteName %>/<%= siteInfo._id %>"><div class="wipe"></div><button class="navContainer">
+                    <span>Posts</span>
+                </button></a>
+                <a href="/siteProfile"><div class="wipe"></div><button class="navContainer">
+                    <span>About <%= siteInfo.siteName %></span>
+                </button></a>
+                <a href="/calendar/siteEvents/id/<%= siteInfo._id %>"><div class="wipe"></div><button class="navContainer">
+                    <span>Calendar</span>
+                </button></a>
             </nav>      
         </section>    
-    </section>

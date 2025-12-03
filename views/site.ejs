@@ -2,23 +2,22 @@
 <head>
     <link rel="stylesheet" href="/css/main.css">
     <link rel="stylesheet" href="/css/list.css">
-    <link rel="stylesheet" href="/css/door.css">
-    <script type="text/javascript" src="/js/comments.js"></script>
+    
 
 </head>
 <body>
-<%- include('partials/locationInfo') %>
+    <%- include('partials/realHeader') %>
+    <%- include('partials/locationInfo') %>
     <!-- <section class="title">
     <h1>Welcome to <%= siteInfo.siteName %></h1>
     <a href="/logout">
         <button type="submit">Log Out</button>
     </a>
     </section> -->
-    
+
     <section class="bigContainer">
-        <div class="door"></div>
     <section class="intro">
-        <h1>Posts for <%= siteInfo.siteName %> </h1>
+        <h1>Posts</h1>
     </section>
     <ul>
         <% for (const post of posts) { %>
@@ -89,4 +88,5 @@
     </section>
 
 <script type="text/javascript" src="/js/posts.js"></script>
+<script type="text/javascript" src="/js/comments.js"></script>
 <%- include('partials/footer.ejs') -%>
