@@ -6,3 +6,32 @@
 .bigContainer section, a{
     z-index: 1;
 }
+
+.leaflet-popup-content{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: var(--color1);
+    color:var(--gray);
+    padding: 5px;
+}
+
+.leaflet-popup-content-wrapper{
+    background: var(--color1);
+    color:var(--gray);
+}
+
+.leaflet-popup-close-button span{
+    color:var(--gray);
+}
+
+.popupImg{
+    margin-top: 10px;
+    object-fit: scale-down;
+    height:130px;
+}
+
+.popupTitle{
+    font-size: 1.2rem;
+    font-weight:bold;
+}

@@ -34,7 +34,7 @@ function startUp() {
             .then(data => {
                 console.log(data)
                 data.locations.forEach(loc => {
-                    locations.push([ loc.siteName , loc.location.latitude, loc.location.longitude,loc._id ])
+                    locations.push([ loc.siteName , loc.location.latitude, loc.location.longitude, loc._id, loc.description, loc.image ])
                 })
                 console.log(locations)
                 addMarker(locations,crds)
@@ -50,9 +50,10 @@ async function addMarker(locations,crds){
     await locations.forEach(loc => {
         marker = new L.marker([loc[1],loc[2]])
             .bindPopup(`
-                <h4>${loc[0]}</h4>
-                <span>A short description</span><br>
-                <a href="/compareLocation/id/${loc[3]}/lat/${crds.latitude}/lng/${crds.longitude}"><button id="sendId">Link</button></a>
+                <h4 class="popupTitle">${loc[0]}</h4>
+                <img class="popupImg" src="${loc[5]}"><br>
+                <span>${loc[4]}</span><br>
+                <a href="/compareLocation/id/${loc[3]}/lat/${crds.latitude}/lng/${crds.longitude}"><button id="sendId">Are you close?</button></a>
             `)
             .addTo(map)
         
@@ -105,26 +106,36 @@ async function addMarker(locations,crds){
 
 //============
 // way to add more than 1 pin taken from this stack overflow: https://stackoverflow.com/questions/42968243/how-to-add-multiple-markers-in-leaflet-js
-// map.on('click', onMapClick)
-// function onMapClick(e){
+map.on('click', onMapClick)
+function onMapClick(e){
+    const siteName = prompt('Enter name')
+    //add files to post: https://stackoverflow.com/questions/36067767/how-do-i-upload-a-file-with-the-js-fetch-api
+    const image = document.querySelector('#image')
+    const data = new FormData()
+    
+    data.append('file', image.files[0])
+    
+    const description = document.querySelector('#description').value
+    data.append('jsonData',JSON.stringify(
+        {siteName:siteName,
+        location:{ latitude : e.latlng.lat, longitude : e.latlng.lng },
+        description: description}))
 
-    // fetch("/placePop", {
-    //     method:"POST",
-    //     headers: {
-    //         "Content-Type": "application/json"
-    //     },
-    //     body:JSON.stringify({
-    //         siteName:`location ${markerMaker}`,
-    //         location:{ latitude : e.latlng.lat, longitude : e.latlng.lng }
-    //     })
-    // })
-    // .then(res => res.text())
-    // .then(data => console.log(data))
+    for (const [key,value] of data.entries()){
+        console.log([key, value])
+    }
 
-//     locations.push([`location ${markerMaker}`,e.latlng.lat,e.latlng.lng])
-//     markerMaker++
-//     addMarker(locations)
-// }
+    fetch("/placePop", {
+        method:"POST",
+        body:data
+    })
+    .then(res => res.text())
+    .then(data => console.log(data))
+
+    locations.push([`location ${markerMaker}`,e.latlng.lat,e.latlng.lng])
+    markerMaker++
+    addMarker(locations)
+}
 //===========
 
 // This is where I found event listeners for popups: https://stackoverflow.com/questions/60781618/leaflet-how-to-add-click-event-to-button-inside-marker-pop-up-in-ionic-app

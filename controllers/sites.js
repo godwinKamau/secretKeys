@@ -2,6 +2,7 @@ const User = require('../models/User')
 const DummySite = require('../models/DummySite')
 const Post = require('../models/Post')
 const Comment = require('../models/Comments')
+const cloudinary = require("../middleware/cloudinary");
 
 //finds messages in relevant distance
 function haversineDistance(lat1, lon1, lat2, lon2) {
@@ -22,12 +23,26 @@ function haversineDistance(lat1, lon1, lat2, lon2) {
 module.exports = {
 
     postPop: async (req,res) => {
-        console.log(req.body.siteName,req.body.location.latitude,req.body.location.longitude)
-        await DummySite.create({
-            siteName:req.body.siteName,
-            location:{latitude:req.body.location.latitude,longitude:req.body.location.longitude}
-        })
-        res.send(`${req.body.siteName} saved!`)
+        try {
+            console.log(req.file)
+            // Upload image to cloudinary
+            let result = null
+            if (req.file){
+                result = await cloudinary.uploader.upload(req.file.path);
+            }
+            const request = JSON.parse(req.body.jsonData)
+            console.log(request)
+            await DummySite.create({
+                siteName:request.siteName,
+                location:{latitude:request.location.latitude,longitude:request.location.longitude},
+                image: result?.secure_url,
+                cloudinaryId: result?.public_id,
+                description:request.description
+            })
+            res.send(`${request.siteName} saved!`)
+        } catch(err) {
+            console.log(err)
+        }
     },
 
     getPop: async (req,res) => {

@@ -7,7 +7,9 @@ module.exports = multer({
     if(!file){
       cb(null, true);   
     }
+
     let ext = path.extname(file.originalname);
+    
     if (ext !== ".jpg" && ext !== ".jpeg" && ext !== ".png") {
       cb(new Error("File type is not supported"), false);
       return;
