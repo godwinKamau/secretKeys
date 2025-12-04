@@ -30,6 +30,30 @@ module.exports = {
   getColors: async (req,res) => {
     const user = await User.findById(req.user._id)
     res.json(user.colors)
-
+  },
+  getInventory: async (req,res) => {
+    res.render("shopping", {user:req.user})
+  },
+  putColor: async (req,res) => {
+    console.log(req.params)
+    if (req.params.color === 'mahogany') {
+      await User.findByIdAndUpdate(req.user._id, { 
+        $set: { colors: { color1: '2D1115', color2: '65334D', color3: '934683'}},
+        $inc: { score: -30 }
+      })
+      res.redirect("/profile")
+    } else if (req.params.color === 'blue') {
+      await User.findByIdAndUpdate(req.user._id, { 
+        $set: { colors: { color1: '5A7684', color2: '92AFD7', color3: 'C5D1EB'}},
+        $inc: { score: -30}
+      })
+      res.redirect("/profile")
+    } else if (req.params.color === 'gatsby') {
+      await User.findByIdAndUpdate(req.user._id, { 
+        $set: { colors: { color1: '1b4332', color2: '2d6a4f', color3: '40916c'}},
+        $inc: { score: -30}
+      })
+      res.redirect("/profile")
+    }
   }
 };

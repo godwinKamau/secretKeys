@@ -1,0 +1,19 @@
+<%- include("partials/header") %>
+
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="/css/profile.css">
+
+</head>
+<body>
+    <%- include("partials/realHeader") %>
+    <%- include("partials/profileInfo") %>
+    <section class="bigContainer flexTop center">
+        <section class="bang">
+            <h1>That's too far!</h1>
+        </section>
+        <section class="distance">
+            <h2>You're <%= distance.toFixed(3) %> kilometers (<%= (distance * 0.621371).toFixed(3) %> miles) away!</h2>
+        </section>
+        <a href="/profile"><button class="singleButton">Back to Your Profile</button></a>
+    </section>
+<%- include("partials/footer") %>

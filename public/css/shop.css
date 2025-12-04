@@ -1,0 +1,90 @@
+h1{
+   margin-bottom: 20px; 
+}
+
+h2{
+    font-size: 1.5rem;
+}
+
+button:hover{
+    cursor:pointer;
+}
+
+.colors{
+    width:100%;
+    border-top: 1px solid white;
+    border-bottom: 1px solid white;
+    padding:10px 5px;
+}
+
+.selection{
+    border-top: 1px solid white;
+    height:14rem;
+    display:flex;
+    gap:15px;
+    align-items: center;
+    padding:10px 20px;
+}
+
+.priceBox{
+    height: 13rem;
+    width:10rem;
+    border:3px solid var(--gray);
+    background-color: aliceblue;
+    border-radius:15px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+
+}
+
+.imgBox, .colorBox{
+    height:50%;
+    width:80%;
+}
+
+.colorBox{
+    border:1px solid black;
+}
+
+.imgBox{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#mahogany{
+    background: linear-gradient(90deg, #2D1115 0%, 
+                                        #2D1115 33%,
+                                        #65334D 33%,
+                                        #65334D 66%,
+                                        #934683 66%,
+                                        #934683 100%);
+}
+
+#deepBlue{
+    background: linear-gradient(90deg, #5A7684 0%, 
+                                        #5A7684 33%,
+                                        #92AFD7 33%,
+                                        #92AFD7 66%,
+                                        #C5D1EB 66%,
+                                        #C5D1EB 100%);
+}
+
+#deepGreen{
+    background: linear-gradient(90deg, #1b4332 0%, 
+                                        #1b4332 33%,
+                                        #2d6a4f 33%,
+                                        #2d6a4f 66%,
+                                        #40916c 66%,
+                                        #40916c 100%);
+}
+
+.imgBox img{
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+    overflow: hidden;
+}

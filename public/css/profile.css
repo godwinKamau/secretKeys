@@ -35,3 +35,16 @@
     font-size: 1.2rem;
     font-weight:bold;
 }
+
+.bang{
+    height: 10rem;
+}
+
+.distance{
+    height: 7rem;
+}
+
+.singleButton{
+    height:4rem;
+    width:10rem;
+}

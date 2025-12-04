@@ -6,6 +6,7 @@ const homeController = require("../controllers/home");
 const siteController = require("../controllers/sites")
 // const postsController = require("../controllers/posts");
 const { ensureAuth, ensureGuest } = require("../middleware/auth");
+const home = require("../controllers/home");
 
 //Main Routes - simplified for now
 router.get("/", homeController.getIndex);
@@ -20,7 +21,9 @@ router.get("/logout", authController.logout);
 router.get("/signup", authController.getSignup);
 router.post("/signup", authController.postSignup);
 router.get("/signupAdmin", authController.getAdmin);
-router.get("/renderSite/:siteName/:_id", siteController.renderSite)
-router.get("/getColors",homeController.getColors)
+router.get("/renderSite/:siteName/:_id", siteController.renderSite);
+router.get("/getColors",homeController.getColors);
+router.get("/inventory", homeController.getInventory);
+router.put("/buyColor/:color", homeController.putColor);
 
 module.exports = router;

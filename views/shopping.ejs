@@ -1,0 +1,63 @@
+<%- include("partials/header") %>
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="/css/profile.css">
+    <link rel="stylesheet" href="/css/shop.css">
+</head>
+<body>
+    <%- include("partials/realHeader") %>
+    <%- include("partials/profileInfo") %>
+
+    <section class="bigContainer flexTop">
+        <h1>Welcome to the Shop!</h1>
+        <section class="colors">
+            <h2>Palette</h2>
+            <section class="selection">
+                <section class="priceBox">
+                    <section id="mahogany" class="colorBox"></section>
+                    <h3>Mahogany</h3>
+                    <p>Price: 30 points</p>
+                    <form action="/buyColor/mahogany?_method=PUT" method="post">
+                        <button>Purchase Palette</button>
+                    </form>
+                </section>
+                <section class="priceBox">
+                    <section id="deepBlue" class="colorBox"></section>
+                    <h3>Deep Blue</h3>
+                    <p>Price: 30 points</p>
+                    
+                    <form action="/buyColor/blue?_method=PUT" method="post">
+                        <button>Purchase Palette</button>
+                    </form>
+                </section>
+                <section class="priceBox">
+                    <section id="deepGreen" class="colorBox"></section>
+                    <h3>Gatsby</h3>
+                    <p>Price: 30 points</p>
+                    
+                    <form action="/buyColor/gatsby?_method=PUT" method="post">
+                        <button>Purchase Palette</button>
+                    </form>
+                </section>
+            </section>
+            
+            
+        </section>
+        <section class="colors">
+            <h2>Coupons</h2>
+            <section class="selection">
+                <section class="priceBox">
+                    <section class="imgBox">
+                        <img src="/img/default.png">
+                    </section>
+                    <h3 style="font-size: 1rem;">Godwin's Pizzeria!</h3>
+                    <p>Price: 150 points</p>
+                    
+                    <form action="/buyColor/gatsby?_method=PUT" method="post">
+                        <button>Purchase Palette</button>
+                    </form>
+                </section>
+            </section>
+        </section>
+    </section>
+
+    <%-include("partials/footer") %>

@@ -21,12 +21,18 @@
     <!-- Modal content -->
     <div class="modal-content">
     <form action="/calendar/addEvent" method="POST">
-        <h2 class="getEventTitle"></h2>
-        <div class="getDesc"></div>
-        <img class="getImg">
-        <input type="hidden" class="eventId" name="eventId">
-        <input type="hidden" class="siteId" name="siteId">
-        <button type="submit">Add Event</button>
+        <section class="eventDeets">
+            <h2 class="getEventTitle"></h2>
+            <div class="getDesc"></div>
+            <input type="hidden" class="eventId" name="eventId">
+            <input type="hidden" class="siteId" name="siteId">
+            <button type="submit">Add Event</button>
+        </section>
+        <section class="eventImg">
+            <img class="getImg">
+        </section>
+        
+        
     </form>
     </div>
 
