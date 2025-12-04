@@ -18,17 +18,24 @@ function currentLocation(){
 function startUp() {
     navigator.geolocation.getCurrentPosition(async (pos) => {
         const crds = pos.coords
-        await fetch(`http://api.geonames.org/findNearbyPlaceNameJSON?lat=${crds.latitude}&lng=${crds.longitude}&username=significantswim1984`)
-            .then(res => res.json())
-            .then(async data => {
-                const lat = data.geonames[0].lat
-                const long = data.geonames[0].lng
-                map.setView([lat, long], 13);
+        // await fetch(`http://api.geonames.org/findNearbyPlaceNameJSON?lat=${crds.latitude}&lng=${crds.longitude}&username=significantswim1984`)
+        //     .then(res => res.json())
+        //     .then(async data => {
+        //         const lat = data.geonames[0].lat
+        //         const long = data.geonames[0].lng
+        //         map.setView([lat, long], 13);
+        //         await L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        //             maxZoom: 19,
+        //             attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+        //         }).addTo(map);
+        //     })
+        const lat = crds.latitude
+        const long = crds.longitude
+        map.setView([lat, long], 13);
                 await L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
                     maxZoom: 19,
                     attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
                 }).addTo(map);
-            })
         fetch("/getLocations")
             .then(res => res.json())
             .then(data => {
