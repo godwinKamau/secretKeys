@@ -9,6 +9,7 @@ module.exports = {
             comment:req.body.comment,
             post:req.params.postId,
             user:req.user._id,
+            userName: req.user.userName
         })
         console.log('Comment Added')
         const loc = await DummySite.findOne({ _id:req.params.siteId})
