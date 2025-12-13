@@ -11,7 +11,7 @@
         <h1><%= siteInfo.siteName %></h1>
         <button id="myBtn">Add a Post</button>
     </section>
-    <ul>
+    <!-- <ul>
         <% for (const post of posts) { %>
         <li>
             <section class = "date">
@@ -28,6 +28,28 @@
         </li>
                 
         <% } %>
+    </ul> -->
+    <ul>
+        <% for (const post of posts) { %>
+        <li>
+            <section class = "date">
+                <% const monthNames = ["January", "February", "March", "April", "May","June","July", "August", "September", "October", "November","December"] %>
+                <p><%= monthNames[post.createdAt.getMonth()] %> <%= post.createdAt.getDate() %>,<%= post.createdAt.getFullYear() %>, <%= post.createdAt.getHours() > 12 ?  post.createdAt.getHours()-12: post.createdAt.getHours()%>:<%= post.createdAt.getSeconds() %><%= post.createdAt.getHours() > 12 ? 'pm': 'am' %></p>
+            </section>
+            <section class="center">
+                <section class="title">
+                    <%= post.post %>
+                </section>
+                <% if (post.image) { %>
+                <div class="media">
+                    <img class="postImage" src="<%= post.image %>">
+                </div>
+                <% } %>
+            </section>
+
+        </li>
+                
+        <% } %>
     </ul>
     
     </section>
@@ -37,7 +59,7 @@
 
     <!-- Modal content -->
     <div class="modal-content">
-    <form action="/post/createPost" enctype="multipart/form-data" method="POST">
+    <form class="postInput" action="/post/createPost" enctype="multipart/form-data" method="POST">
         <section class="options">
             <button type="button" id="close">Cancel</button>
             <section class="button">

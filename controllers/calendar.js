@@ -5,17 +5,18 @@ const cloudinary = require("../middleware/cloudinary");
 
 module.exports = {
     getSiteCalendar: async (req,res) => {
+        const user = req.user
         const siteInfo = await Site.findOne( { _id: req.params.id})
         if (req.user.access === null || !req.user.access.equals(req.params.id)) {
-            res.render("siteCalendar", { siteInfo, navigator:2 })
+            res.render("siteCalendar", { siteInfo, navigator:2, user })
         } else if (req.user.access.equals(req.params.id)) {
-            res.render('siteCalendar_admin.ejs', { siteInfo, navigator:2 })
+            res.render('siteCalendar_admin.ejs', { siteInfo, navigator:2, user })
         }    
     },
 
     getPersonalCalendar: async (req,res) => {
-        
-        res.render("siteCalendar_user.ejs", { navigator:5 })    
+        const user = req.user
+        res.render("siteCalendar_user.ejs", { navigator:5, user })    
     },
 
     getUserEvents: async(req,res) => {

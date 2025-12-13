@@ -20,9 +20,26 @@ header{
 }
 
 .logo{
-    width:150px;
-    background: pink;
+    width:250px;
     height: 100%;
+}
+
+.logo{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.logo .imgLogo{
+    object-fit: scale-down;
+    width:20%;
+    height:100%;
+}
+
+.logo h4{
+    font-family: 'Noir-et-Blanc Bold', 'Times New Roman', Times, serif;
+    font-size: 1.2rem;
+    color:#BB7333;
 }
 
 .headerButtons{

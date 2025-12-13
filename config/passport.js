@@ -45,9 +45,4 @@ module.exports = function (passport) {
     }
   });
 
-  // passport.deserializeUser(function(user, cb) {
-  //   process.nextTick(function() {
-  //     return cb(null, user);
-  //   });
-  // });
 }

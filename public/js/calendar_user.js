@@ -28,7 +28,8 @@ slotMaxTime: "21:00:00",  // or whatever end time you want
                             description: el.eventDescription,
                             image: el.image,
                             id: el._id
-                        }
+                        },
+                        backgroundColor: `rgb(${Math.floor(Math.random()*255)},${Math.floor(Math.random()*255)},${Math.floor(Math.random()*255)})`,
                     }
                     returnArray.push(object)
                 });

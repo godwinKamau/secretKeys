@@ -29,7 +29,14 @@ module.exports = {
   },
   getColors: async (req,res) => {
     const user = await User.findById(req.user._id)
-    res.json(user.colors)
+    console.log('colors',user.colors.color1)
+    if (user.colors.color1){
+      res.json(user.colors)
+    } else {
+      const response = { colors: null }
+      res.json(response.colors)
+    }
+    
   },
   getInventory: async (req,res) => {
     res.render("shopping", {user:req.user})
