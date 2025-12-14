@@ -24,7 +24,7 @@
         <li>
             <section class = "date">
                 <% const monthNames = ["January", "February", "March", "April", "May","June","July", "August", "September", "October", "November","December"] %>
-                <p><%= monthNames[post.createdAt.getMonth()] %> <%= post.createdAt.getDate() %>,<%= post.createdAt.getFullYear() %>, <%= post.createdAt.getHours() > 12 ?  post.createdAt.getHours()-12: post.createdAt.getHours()%>:<%= post.createdAt.getSeconds() %><%= post.createdAt.getHours() > 12 ? 'pm': 'am' %></p>
+                <p><%= monthNames[post.createdAt.getMonth()] %> <%= post.createdAt.getDate() %>,<%= post.createdAt.getFullYear() %>, <%= post.createdAt.getHours() > 12 ?  post.createdAt.getHours()-12: post.createdAt.getHours()%>:<%= String(post.createdAt.getMinutes()).padStart(2,'0') %><%= post.createdAt.getHours() > 11 ? 'pm': 'am' %></p>
             </section>
             <section class="center">
                 <section class="title">

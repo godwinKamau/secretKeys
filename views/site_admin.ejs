@@ -8,28 +8,14 @@
 <%- include('partials/locationInfo') %>
     <section class="bigContainer">
     <section class="intro">
-        <h1><%= siteInfo.siteName %></h1>
+        <% if (siteInfo.siteName.length > 8) { %>
+                    <h1 style="font-size: 2rem; text-shadow: 3px 3px var(--color1);"><%= siteInfo.siteName %></h1>    
+                <% } else { %> 
+                    <h1><%= siteInfo.siteName %></h1>
+                <% } %>
         <button id="myBtn">Add a Post</button>
     </section>
     <!-- <ul>
-        <% for (const post of posts) { %>
-        <li>
-            <section class = "date">
-                <%= post.createdAt %>
-            </section>
-            <section class="title">
-                <%= post.post %>
-            </section>
-            <% if (post.image) { %>
-                <div class="media">
-                    <img src="<%= post.image %>">
-                </div>
-            <% } %>    
-        </li>
-                
-        <% } %>
-    </ul> -->
-    <ul>
         <% for (const post of posts) { %>
         <li>
             <section class = "date">
@@ -50,7 +36,68 @@
         </li>
                 
         <% } %>
+    </ul> -->
+    <ul>
+        <% for (const post of posts) { %>
+        <li>
+            <section class = "date">
+                <% const monthNames = ["January", "February", "March", "April", "May","June","July", "August", "September", "October", "November","December"] %>
+                <p><%= monthNames[post.createdAt.getMonth()] %> <%= post.createdAt.getDate() %>,<%= post.createdAt.getFullYear() %>, <%= post.createdAt.getHours() > 12 ?  post.createdAt.getHours()-12: post.createdAt.getHours()%>:<%= String(post.createdAt.getMinutes()).padStart(2,'0') %><%= post.createdAt.getHours() > 11 ? 'pm': 'am' %></p>
+            </section>
+            <section class="center">
+                <section class="title">
+                    <%= post.post %>
+                </section>
+                <% if (post.image) { %>
+                <div class="media">
+                    <img class="postImage" src="<%= post.image %>">
+                </div>
+                <% } %>
+            </section>
+            <section class="marqueeContainer">
+                
+                <section class="marquee">
+                
+                <% if (comments[post._id]) { %> 
+                    
+                    <p class="commentText">
+                    <% comments[post._id].forEach(comment =>{ %>
+                        
+                        <span>|</span> &emsp; 
+                        <span><%=comment.userName %>- </span>
+                        <%= comment.comment %> 
+                        &emsp; <span>|</span>
+                        
+                    <% }) %>
+                    </p>
+                <% } %>
+                
+                </section>
+            </section>
+            <section class="actions">
+                <section class="buttons">
+
+                    
+                    <button class="btn comments"><span><i class="fa-solid fa-comment"></i></span></button>
+                    
+                    <button class="btn"><span><i class="fa-solid fa-thumbtack"></i></span></button>
+                </section>
+            </section>
+            <section class="commentPopup">
+                <form
+                    action="/comment/createComment/<%= post._id %>/<%= siteInfo._id %>"
+                    method="POST"
+                >
+                    <label for="comment">Your Comment:</label>
+                    <textarea class="commentArea" id="comment" name="comment"></textarea>
+                    <button class="submitComment">Add Comment</button>
+                </form>
+            </section>    
+        </li>
+                
+        <% } %>
     </ul>
+    </section>
     
     </section>
 

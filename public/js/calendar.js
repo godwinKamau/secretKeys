@@ -26,7 +26,8 @@ const ec = EventCalendar.create(document.getElementById('ec'), {
                             description: el.eventDescription,
                             image: el.image,
                             id: el._id
-                        }
+                        },
+                        backgroundColor: `rgb(${Math.floor(Math.random()*255)},${Math.floor(Math.random()*255)},${Math.floor(Math.random()*255)})`,
                     }
                     returnArray.push(object)
                 });

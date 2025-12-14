@@ -1,6 +1,7 @@
 const User = require("../models/User");
 const Sites = require("../models/DummySite")
 const Post = require("../models/Post")
+const Comment = require("../models/Comments")
 const mongoose = require("mongoose")
 
 module.exports = {
@@ -15,10 +16,20 @@ module.exports = {
 
       
       if (user.access){
+        const postComments = {}
         const siteInfo = await Sites.findById(user.access)
         const posts = await Post.find({ location: user.access}).sort({ createdAt: -1 })
+        await Promise.all(
+                    posts.map(async post => {
+                        const comments = await Comment.find({ post: post._id });
+        
+                        if (comments.length > 0) {
+                            postComments[post._id] = comments;
+                        }
+                    })
+                );
         console.log('posts',posts)
-        res.render("site_admin.ejs", { siteInfo, user, posts })
+        res.render("site_admin.ejs", { siteInfo, user, posts, comments: postComments })
       } else {
         res.render("profile.ejs", { user });
       }

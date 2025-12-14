@@ -10,6 +10,7 @@
         const id = <%- JSON.stringify(siteInfo._id) %>
     </script>
     <body>
+<%- include("partials/realHeader") %>
 <%- include ("partials/locationInfo") %>
         <section class="bigContainer">
             <div id="ec"></div>
@@ -22,8 +23,10 @@
         <h2>Create an Event</h2>
         <label for="eventTitle">Title:</label><input type="text" name="eventTitle" id="eventTitle">
         <label for="eventDescription">Description: </label><textarea name="eventDescription" id="eventDescription"></textarea>
+        <section class="startEnd">
         <label for="eventStart">Start Time: </label><input type="text" id="eventStart" name="eventStart">
         <label for=eventEnd>End Time: </label><input type="text" id="eventEnd" name="eventEnd">
+        </section>
         <label for="imageUpload"><span><i class="fa-regular fa-image"></i></span></label><input type="file" id="imageUpload" name="file">
         <button type="submit">Make an Event</button>
         <input type="hidden" name="siteId" value="<%= siteInfo._id %>">
@@ -37,8 +40,10 @@
     <!-- Modal content -->
     <div class="modal-content">
     <form action="" enctype="multipart/form-data" method="POST">
-        <h2 class="getEventTitle"></h2>
-        <div class="getDesc"></div>      
+        <section class="eventDeets">
+            <h2 class="getEventTitle"></h2>
+            <div class="getDesc"></div>
+        </section>     
         <img class="getImg">  
     </form>
     </div>

@@ -87,7 +87,7 @@ module.exports = {
         if (req.user.access === null){
             res.render('site.ejs',{siteInfo:req.params, posts, navigator:0, comments:postComments, user })
         } else if (req.user.access.equals(req.params._id)) {
-            res.render('site_admin.ejs', {siteInfo:req.params, user:req.user, posts, navigator:0 })
+            res.render('site_admin.ejs', {siteInfo:req.params, user:req.user, posts, navigator:0, comments:postComments })
         } 
     }
 }
